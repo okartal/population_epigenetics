@@ -1,0 +1,8 @@
+data:
+  multiplex:
+    units:
+      data/multiplex_units.csv
+    samples:
+      data/multiplex_samples.csv
+params:
+threads:

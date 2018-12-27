@@ -1,0 +1,12 @@
+name:
+  pop-epi
+channels:
+  - bioconda
+  - default
+dependencies:
+  - atropos # read QC
+  - pandas
+  - pheniqs # read demultiplexing
+  - sambamba # read group filtering
+  - samtools # SAM to FASTQ while retaining read groups
+  - snakemake
