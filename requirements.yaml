@@ -9,4 +9,3 @@ dependencies:
   - pheniqs # read demultiplexing
   - sambamba # read group filtering
   - samtools # SAM to FASTQ while retaining read groups
-  - snakemake
