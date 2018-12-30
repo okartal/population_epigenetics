@@ -6,13 +6,16 @@ data:
       data/multiplex_samples.csv
 params:
   pheniqs:
-    transform:
-      token: ["1::", "2::"]
-    multiplex:
+    interleave:
+      ["index", "read1", "read2"]
+    demultiplex:
       transform:
-        token: ["0::6"]
-      algorithm: pamld
-      noise: 0.02
-      confidence threshold: 0.95
+        token: ["1::", "2::"]
+      multiplex:
+        transform:
+          token: ["0::6"]
+        algorithm: pamld
+        noise: 0.02
+        confidence threshold: 0.95
 threads:
     pheniqs: 3

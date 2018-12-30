@@ -1,15 +1,15 @@
-import json
-
 rule pheniqs_interleave_config:
-    """Make pheniqs config file for interleaving reads.
+    """Make pheniqs_config file for interleaving reads.
+    
+    The input function gets the appropriate fastq files using the wildcard {unit}.
     """
     input:
-        lambda wildcards: units.loc[wildcards.unit, "index read1 read2".split()]
+        lambda wildcards: units.loc[wildcards.unit, config["params"]["pheniqs"]["interleave"]]
     output:
-        config="data/{unit}_interleave_config.json"
+        json="data/{unit}_interleave_config.json"
     run:
-        config = dict()
-        config["input"] = input
-        config["output"] = ["data/{}.cram".format(wildcards.unit)]
-        with open(output.config, "w") as configfile:
-            json.dump(config, configfile, indent=4)
+        pheniqs_config = dict()
+        pheniqs_config["input"] = input
+        pheniqs_config["output"] = ["data/{}.cram".format(wildcards.unit)]
+        with open(output.json, "w") as outputfile:
+            json.dump(pheniqs_config, outputfile, indent=4)
