@@ -1,5 +1,5 @@
 rule pheniqs_interleave_config:
-    """Make pheniqs_config file for interleaving reads.
+    """Make pheniqs config file for interleaving reads.
     
     The input function gets the appropriate fastq files using the wildcard {unit}.
     """

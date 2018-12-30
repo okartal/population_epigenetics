@@ -1,12 +1,19 @@
 data:
   multiplex:
     units:
+      # A CSV file with header
+      # minimum columns: id,read1,read2,index,flowcell id,flowcell lane number
+      # optional read group columns: CN,DT,PL,PM
       data/multiplex_units.csv
     samples:
+      # A CSV file with header
+      # minimum columns: unit-id,barcode
+      # optional read group columns: SM,LB
       data/multiplex_samples.csv
 params:
   pheniqs:
     interleave:
+      # has to match data:multiplex:units headers
       ["index", "read1", "read2"]
     demultiplex:
       transform:
