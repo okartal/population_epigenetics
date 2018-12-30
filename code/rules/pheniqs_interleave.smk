@@ -8,4 +8,4 @@ rule pheniqs_interleave:
     threads:
         config["threads"]["pheniqs"]
     shell:
-        "pheniqs mux --config {input}"
+        "pheniqs mux -t {threads} --config {input}"
