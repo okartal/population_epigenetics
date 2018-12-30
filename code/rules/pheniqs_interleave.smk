@@ -5,5 +5,7 @@ rule pheniqs_interleave:
         "data/{unit}_interleave_config.json"
     output:
         "data/{unit}.cram"
+    threads:
+        config["threads"]["pheniqs"]
     shell:
         "pheniqs mux --config {input}"

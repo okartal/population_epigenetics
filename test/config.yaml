@@ -5,4 +5,14 @@ data:
     samples:
       data/multiplex_samples.csv
 params:
+  pheniqs:
+    transform:
+      token: ["1::", "2::"]
+    multiplex:
+      transform:
+        token: ["0::6"]
+      algorithm: pamld
+      noise: 0.02
+      confidence threshold: 0.95
 threads:
+    pheniqs: 3
