@@ -10,17 +10,22 @@ units = pd.read_csv(config["data"]["multiplex"]["units"], index_col="id")
 rule end:
     input:
         expand(
-            "data/{unit}_demux.config.json",
-            unit=units.index.values
+            "data/{unit}_demux.{variant}.json",
+            unit=units.index.values,
+            variant=[
+                "config",
+                "report"
+            ]
         ),
         expand(
             "data/{unit}{variant}.cram",
             unit=units.index.values,
             variant=[
-                ""
-                # , ".demux"
+                "_inter",
+                "_demux"
                 ]
         )
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
+include: "rules/pheniqs_demultiplex.smk"

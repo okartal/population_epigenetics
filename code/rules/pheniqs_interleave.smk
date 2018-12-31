@@ -4,7 +4,7 @@ rule pheniqs_interleave:
     input:
         units=config["data"]["multiplex"]["units"]
     output:
-        "data/{unit}.cram"
+        "data/{unit}_inter.cram"
     threads:
         config["threads"]["pheniqs"]
     run:
