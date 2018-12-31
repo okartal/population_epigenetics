@@ -25,4 +25,4 @@ params:
         noise: 0.02
         confidence threshold: 0.95
 threads:
-    pheniqs: 3
+    pheniqs: 2

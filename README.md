@@ -24,14 +24,21 @@ The aim of the project is to estimate the probability of gain and loss of DNA me
     3. Run the test:
         ```sh
         cd test/
-        snakemake -pj --use-conda --snakefile ../Snakefile
+        snakemake -pj --use-conda --snakefile ../code/Snakefile
         ```
 - To run the pipeline on real data:
 
-    1. Set up a project directory similar to test/ with its own proper config.yaml file.
+    1. Set up a project folder similar to test/, that has the following files:
+        ```
+        config.yaml
+        data/multiplex_units.csv
+        data/multiplex_samples.csv
+        data/<read_files>
+        ```
+        You need to adapt the data in the CSV files. In the config file, you may change the params and threads according to your needs. **However, do not change the data fields, that would break the workflow!**
     2. Ensure that the pop-epi environment is active.
     3. Run the pipeline:
         ```sh
-        cd test/
-        snakemake -pj --use-conda --snakefile <path/to/Snakefile>
+        cd <your/project/folder>/
+        snakemake -pj --use-conda --snakefile <path/to/Snakefile/from/this/repo>
         ```

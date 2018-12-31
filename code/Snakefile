@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-from code.utils import pheniqs
+from utils import pheniqs
 
 configfile: "config.yaml"
 
@@ -12,14 +12,20 @@ rule end:
         expand(
             "data/{unit}_{variant}_config.json",
             unit=units.index.values,
-            variant=["interleave", "demultiplex"]
+            variant=[
+                "interleave"
+                , "demux"
+                ]
         ),
         expand(
             "data/{unit}{variant}.cram",
             unit=units.index.values,
-            variant=["", ".demux"]
+            variant=[
+                ""
+                #, ".demux"
+                ]
         )
 
-include: "code/rules/pheniqs_interleave_config.smk"
-include: "code/rules/pheniqs_interleave.smk"
-include: "code/rules/pheniqs_demultiplex_config.smk"
+include: "rules/pheniqs_interleave_config.smk"
+include: "rules/pheniqs_interleave.smk"
+include: "rules/pheniqs_demultiplex_config.smk"

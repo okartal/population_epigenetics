@@ -1,3 +1,5 @@
 .snakemake/
 .vscode/
 test/data/
+*.pyc
+.ipynb_checkpoints/
