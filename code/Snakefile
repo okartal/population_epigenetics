@@ -22,6 +22,5 @@ rule end:
                 ]
         )
 
-# include: "rules/pheniqs_interleave_config.smk"
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
