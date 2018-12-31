@@ -5,16 +5,13 @@ rule pheniqs_demultiplex_config:
         reads="data/{unit}.cram",
         samples=config["data"]["multiplex"]["samples"]
     output:
-        json="data/{unit}_demux_config.json"
+        json="data/{unit}_demux.config.json"
     run:
         pheniqs_config = config["params"]["pheniqs"]["demultiplex"]
         
         input_streams = config["params"]["pheniqs"]["interleave"]
 
         pheniqs_config["input"] = [input.reads] * len(input_streams)
-        
-        pheniqs_config["output"] = [
-            "data/{}.demux.cram".format(wildcards.unit)]
         
         codec_table = (pd.read_csv(input.samples, header=0)
             .groupby("unit-id")
