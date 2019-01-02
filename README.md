@@ -16,7 +16,7 @@ The aim of the project is to estimate the probability of gain and loss of DNA me
     ```
 - To run the pipeline on test data:
 
-    1. Download the test data folder from [here](https://drive.google.com/drive/folders/1fwSfb71eED2ob0gJghPfNgHsuUTsTAJt) and move it into `test/`.
+    1. Download the test data from [here](https://drive.google.com/drive/folders/1fwSfb71eED2ob0gJghPfNgHsuUTsTAJt) and move the content into `test/data/primary/`.
     2. Activate the pop-epi conda environment:
         ```sh
         conda activate pop-epi
@@ -28,17 +28,21 @@ The aim of the project is to estimate the probability of gain and loss of DNA me
         ```
 - To run the pipeline on real data:
 
-    1. Set up a project folder similar to test/, that has the following files:
-        ```
-        config.yaml
-        data/multiplex_units.csv
-        data/multiplex_samples.csv
-        data/<read_files>
-        ```
-        You need to adapt the data in the CSV files. In the config file, you may change the params and threads according to your needs. **However, do not change the data fields, that would break the workflow!**
-    2. Ensure that the pop-epi environment is active.
-    3. Run the pipeline:
+    1. Set up your project folder with the following folders and files (structure similar to test/):
         ```sh
-        cd <your/project/folder>/
+        .
+        ├── data
+            ├── primary
+                ├── multiplex_samples.csv
+                ├── multiplex_units.csv
+                ├── <read_files>
+            ├── results_01
+                ├── config.yaml
+        ```
+    2. Adapt the CSV and config file. Set up more results directories with adjusted config files if you want to keep results, for example for different parameter settings. **However, do not change the data fields in the config file, that would break the workflow!**
+    3. Ensure that the pop-epi environment is active.
+    4. Run the pipeline from the appropriate results folder:
+        ```sh
+        cd <path/to/your/project/folder>/data/results_XY/
         snakemake -pj --use-conda --snakefile <path/to/Snakefile/from/this/repo>
         ```

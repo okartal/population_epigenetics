@@ -2,10 +2,10 @@ rule pheniqs_demultiplex_config:
     """Make pheniqs config file for demultiplexing reads.
     """
     input:
-        reads="data/{unit}_inter.cram",
-        samples=config["data"]["multiplex"]["samples"]
+        reads=config["data"]["dir"] + "{unit}_inter.cram",
+        samples=DATA["multiplex_samples"]
     output:
-        json="data/{unit}_demux.config.json"
+        json="{unit}_demux.config.json"
     run:
         pheniqs_config = config["params"]["pheniqs"]["demultiplex"]
         
@@ -13,10 +13,8 @@ rule pheniqs_demultiplex_config:
 
         pheniqs_config["input"] = [input.reads] * len(input_stream)
         
-        codec_table = (pd.read_csv(input.samples, header=0)
-            .groupby("unit-id")
-            .get_group(wildcards.unit)
-            .drop(columns=["unit-id"]))
+        codec_table = (pd.read_csv(
+            input.samples, index_col="unit-id").loc[wildcards.unit])
 
         pheniqs_config["multiplex"]["codec"] = pheniqs.codec_dict(codec_table)
         

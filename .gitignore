@@ -3,3 +3,4 @@
 test/data/
 *.pyc
 .ipynb_checkpoints/
+!test/data/results/config.yaml

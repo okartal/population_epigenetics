@@ -1,16 +1,25 @@
 import json
+
 import pandas as pd
 
 from utils import pheniqs
 
 configfile: "config.yaml"
 
-units = pd.read_csv(config["data"]["multiplex"]["units"], index_col="id")
+DATA = dict()
+DATA["multiplex_units"] = (
+    config["data"]["dir"] + 
+    config["data"]["multiplex_units"]) 
+DATA["multiplex_samples"] = (
+    config["data"]["dir"] + 
+    config["data"]["multiplex_samples"])
+
+units = pd.read_csv(DATA["multiplex_units"], index_col="id")
 
 rule end:
     input:
         expand(
-            "data/{unit}_demux.{variant}.json",
+            "{unit}_demux.{variant}.json",
             unit=units.index.values,
             variant=[
                 "config",
@@ -18,14 +27,16 @@ rule end:
             ]
         ),
         expand(
-            "data/{unit}{variant}.cram",
+            config["data"]["dir"] + "{unit}_inter.cram",
+            unit=units.index.values,
+        ),
+        expand(
+            "{unit}{variant}.cram",
             unit=units.index.values,
             variant=[
-                "_inter",
                 "_demux"
                 ]
         )
-
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
 include: "rules/pheniqs_demultiplex.smk"
