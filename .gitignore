@@ -1,6 +1,8 @@
 .snakemake/
 .vscode/
-test/data/
 *.pyc
 .ipynb_checkpoints/
-!test/data/results/config.yaml
+test/results/*
+test/primary/*.cram
+!test/results/config.yaml
+*.*~
