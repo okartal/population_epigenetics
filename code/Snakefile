@@ -10,32 +10,41 @@ DATA = dict()
 
 DATA["multiplex_units"] = (
     config["data"]["dir"] + 
-    config["data"]["multiplex_units"]) 
+    config["data"]["multiplex_units"])
+
 DATA["multiplex_samples"] = (
     config["data"]["dir"] + 
     config["data"]["multiplex_samples"])
+
+DATA["reference_genome"] = (
+    config["data"]["dir"] + 
+    config["data"]["reference_genome"])
 
 units = pd.read_csv(DATA["multiplex_units"], index_col="id")
 
 rule end:
     input:
         expand(
-            "{unit}_demux.{variant}.json",
-            unit=units.index.values,
-            variant=["config", "report"]
-        ),
-        expand(
             config["data"]["dir"] + "{unit}_inter.cram",
-            unit=units.index.values,
-        ),
+            unit=units.index.values,),
         expand(
-            "{unit}{variant}.cram",
+            "{unit}_demux.{suff}",
             unit=units.index.values,
-            variant=[
-                "_demux"
-                ]
-        )
+            suff=["config.json", "report.json", "cram"]),
+        expand(
+            "{unit}_{mate}.fastq",
+            unit=units.index.values,
+            mate=["R1", "R2"]),
+        expand(
+            "{unit}_mapped.sam",
+            unit=units.index.values),
+        expand(
+            "{unit}_mapped.bam",
+            unit=units.index.values),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
 include: "rules/pheniqs_demultiplex.smk"
+include: "rules/samtools_fastq.smk"
+include: "rules/biscuit_align.smk"
+include: "rules/samtools_reheader.smk"

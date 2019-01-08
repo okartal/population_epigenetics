@@ -10,6 +10,8 @@ data:
     # minimum columns: unit-id,barcode
     # optional read group columns: SM,LB
     multiplex_samples.csv
+  reference_genome:
+    TAIR10.fasta
 params:
   pheniqs:
     interleave:
@@ -24,5 +26,9 @@ params:
         algorithm: pamld
         noise: 0.02
         confidence threshold: 0.95
+  samtools_fastq: -T RG
+  samtools_reheader: --no-PG
 threads:
-    pheniqs: 2
+    pheniqs: 8
+    samtools: 8
+    biscuit_align: 8
