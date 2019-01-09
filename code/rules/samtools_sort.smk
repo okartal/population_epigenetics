@@ -3,5 +3,7 @@ rule samtools_sort:
         "{unit}_mapped.mkdup.unsorted.bam"
     output:
         "{unit}_mapped.mkdup.bam"
+    threads:
+        config["threads"]["samtools"]
     shell:
         "samtools sort -@ {threads} -O BAM {input} > {output}"

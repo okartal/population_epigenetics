@@ -4,8 +4,6 @@ rule samtools_reheader:
         demux="{unit}_demux.cram"
     output:
         "{unit}_mapped.bam"
-    threads:
-        config["threads"]["samtools"]
     params:
         config["params"]["samtools_reheader"]
     shell:
