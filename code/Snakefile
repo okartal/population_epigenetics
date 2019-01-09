@@ -48,7 +48,7 @@ rule end:
                 "mkdup.flagstats.txt",
                 "mkdup.stats.txt",
                 "mkdup.idxstats.txt",
-                "mkdup.qc.json.gz"]),
+        ]),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
@@ -63,4 +63,3 @@ include: "rules/samtools_index_post.smk"
 include: "rules/samtools_flagstats.smk"
 include: "rules/samtools_stats.smk"
 include: "rules/samtools_idxstats.smk"
-include: "rules/alfred_qc.smk"
