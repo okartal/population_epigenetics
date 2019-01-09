@@ -18,6 +18,9 @@ params:
       # has to match data:multiplex:units headers
       ["index", "read1", "read2"]
     demultiplex:
+      undetermined:
+          SM: undetermined
+          LB: undetermined
       transform:
         token: ["1::", "2::"]
       multiplex:
