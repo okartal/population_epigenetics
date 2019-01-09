@@ -36,11 +36,19 @@ rule end:
             unit=units.index.values,
             mate=["R1", "R2"]),
         expand(
-            "{unit}_mapped.sam",
-            unit=units.index.values),
-        expand(
-            "{unit}_mapped.bam",
-            unit=units.index.values),
+            "{unit}_mapped.{suff}",
+            unit=units.index.values,
+            suff=[
+                "noRG.bam",
+                "bam", 
+                "bam.bai",
+                "mkdup.unsorted.bam",
+                "mkdup.bam",
+                "mkdup.bam.bai",
+                "mkdup.flagstats.txt",
+                "mkdup.stats.txt",
+                "mkdup.idxstats.txt",
+                "mkdup.qc.json.gz"]),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
@@ -48,3 +56,11 @@ include: "rules/pheniqs_demultiplex.smk"
 include: "rules/samtools_fastq.smk"
 include: "rules/biscuit_align.smk"
 include: "rules/samtools_reheader.smk"
+include: "rules/samtools_index_pre.smk"
+include: "rules/biscuit_markdup.smk"
+include: "rules/samtools_sort.smk"
+include: "rules/samtools_index_post.smk"
+include: "rules/samtools_flagstats.smk"
+include: "rules/samtools_stats.smk"
+include: "rules/samtools_idxstats.smk"
+include: "rules/alfred_qc.smk"

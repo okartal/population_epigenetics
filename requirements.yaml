@@ -5,9 +5,7 @@ channels:
   - default
 dependencies:
   - alfred
-  - atropos
   - pandas
-  - picard
   - pheniqs
   - samtools
   - snakemake

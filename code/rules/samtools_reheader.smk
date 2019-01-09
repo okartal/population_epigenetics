@@ -1,7 +1,7 @@
 rule samtools_reheader:
     input:
-        sam="{unit}_mapped.sam",
-        cram="{unit}_demux.cram"
+        mapped="{unit}_mapped.noRG.bam",
+        demux="{unit}_demux.cram"
     output:
         "{unit}_mapped.bam"
     threads:
@@ -10,7 +10,7 @@ rule samtools_reheader:
         config["params"]["samtools_reheader"]
     shell:
         "cat"
-        " <(samtools view -H {input.sam})"
-        " <(samtools view -H {input.cram} | grep -v ^@HD)"
-        " | samtools reheader {params} - <(samtools sort -@ {threads} -O BAM {input.sam}) "
+        " <(samtools view -H {input.mapped})"
+        " <(samtools view -H {input.demux} | grep -v ^@HD)"
+        " | samtools reheader {params} - {input.mapped}"
         " > {output}"
