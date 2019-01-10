@@ -2,7 +2,8 @@
 .vscode/
 *.pyc
 .ipynb_checkpoints/
+test/primary/*
 test/results/*
-test/primary/*.cram
+!test/primary/multiplex_*.csv
 !test/results/config.yaml
 *.*~
