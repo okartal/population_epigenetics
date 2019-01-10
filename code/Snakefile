@@ -26,29 +26,26 @@ rule end:
     input:
         expand(
             config["data"]["dir"] + "{unit}_inter.cram",
-            unit=units.index.values,),
+            unit=units.index.values),
         expand(
-            "{unit}_demux.{suff}",
-            unit=units.index.values,
-            suff=["config.json", "report.json", "cram"]),
-        expand(
-            "{unit}_{mate}.fastq",
-            unit=units.index.values,
-            mate=["R1", "R2"]),
-        expand(
-            "{unit}_mapped.{suff}",
+            "{unit}{suff}",
             unit=units.index.values,
             suff=[
-                "noRG.bam",
-                "bam", 
-                "bam.bai",
-                "mkdup.unsorted.bam",
-                "mkdup.bam",
-                "mkdup.bam.bai",
-                "mkdup.flagstats.txt",
-                "mkdup.stats.txt",
-                "mkdup.idxstats.txt",
-        ]),
+                "_demux_config.json",
+                "_demux_report.json",
+                "_demux.cram",
+                "_R1.fastq",
+                "_R2.fastq",
+                "_mapped_noRG.bam",
+                "_mapped.bam", 
+                "_mapped.bam.bai",
+                "_mapped_mkdup_unsorted.bam",
+                "_mapped_mkdup.bam",
+                "_mapped_mkdup.bam.bai",
+                "_mapped_mkdup.flagstats",
+                "_mapped_mkdup.stats",
+                "_mapped_mkdup.idxstats"
+            ]),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"

@@ -1,6 +1,6 @@
 rule samtools_reheader:
     input:
-        mapped="{unit}_mapped.noRG.bam",
+        mapped="{unit}_mapped_noRG.bam",
         demux="{unit}_demux.cram"
     output:
         "{unit}_mapped.bam"

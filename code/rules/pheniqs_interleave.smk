@@ -16,7 +16,7 @@ rule pheniqs_interleave:
             "-i "
             + config["data"]["dir"]
             + units.loc[
-                wildcards.unit, config["params"]["pheniqs"]["interleave"]
+                wildcards.unit, config["params"]["pheniqs_interleave"]
             ]
         )
 

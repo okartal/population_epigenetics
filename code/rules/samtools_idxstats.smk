@@ -1,8 +1,8 @@
 rule samtools_idxstats:
     input:
-        "{unit}_mapped.mkdup.bam"
+        "{unit}_mapped_mkdup.bam"
     output:
-        "{unit}_mapped.mkdup.idxstats.txt"
+        "{unit}_mapped_mkdup.idxstats"
     threads:
         config["threads"]["samtools"]
     shell:

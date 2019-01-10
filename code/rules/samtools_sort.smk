@@ -1,8 +1,8 @@
 rule samtools_sort:
     input:
-        "{unit}_mapped.mkdup.unsorted.bam"
+        "{unit}_mapped_mkdup_unsorted.bam"
     output:
-        "{unit}_mapped.mkdup.bam"
+        "{unit}_mapped_mkdup.bam"
     threads:
         config["threads"]["samtools"]
     shell:

@@ -1,9 +1,9 @@
 rule samtools_stats:
     input:
-        bam="{unit}_mapped.mkdup.bam",
+        bam="{unit}_mapped_mkdup.bam",
         ref=DATA["reference_genome"]
     output:
-        "{unit}_mapped.mkdup.stats.txt"
+        "{unit}_mapped_mkdup.stats"
     threads:
         config["threads"]["samtools"]
     shell:

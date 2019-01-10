@@ -4,7 +4,7 @@ rule biscuit_align:
         fq2="{unit}_R2.fastq",
         ref=DATA["reference_genome"]
     output:
-        "{unit}_mapped.noRG.bam"
+        "{unit}_mapped_noRG.bam"
     threads:
         config["threads"]["biscuit_align"]
     shell:

@@ -5,11 +5,11 @@ rule pheniqs_demultiplex_config:
         reads=config["data"]["dir"] + "{unit}_inter.cram",
         samples=DATA["multiplex_samples"]
     output:
-        json="{unit}_demux.config.json"
+        json="{unit}_demux_config.json"
     run:
-        pheniqs_config = config["params"]["pheniqs"]["demultiplex"]
+        pheniqs_config = config["params"]["pheniqs_demultiplex"]
         
-        input_stream = config["params"]["pheniqs"]["interleave"]
+        input_stream = config["params"]["pheniqs_interleave"]
 
         pheniqs_config["input"] = [input.reads] * len(input_stream)
         

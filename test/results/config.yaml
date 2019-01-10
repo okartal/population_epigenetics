@@ -13,22 +13,21 @@ data:
   reference_genome:
     TAIR10.fasta
 params:
-  pheniqs:
-    interleave:
-      # has to match data:multiplex:units headers
-      ["index", "read1", "read2"]
-    demultiplex:
-      undetermined:
-          SM: undetermined
-          LB: undetermined
+  pheniqs_interleave:
+    # has to match data:multiplex:units headers
+    ["index", "read1", "read2"]
+  pheniqs_demultiplex:
+    undetermined:
+        SM: undetermined
+        LB: undetermined
+    transform:
+      token: ["1::", "2::"]
+    multiplex:
       transform:
-        token: ["1::", "2::"]
-      multiplex:
-        transform:
-          token: ["0::6"]
-        algorithm: pamld
-        noise: 0.02
-        confidence threshold: 0.95
+        token: ["0::6"]
+      algorithm: pamld
+      noise: 0.02
+      confidence threshold: 0.95
   samtools_fastq: -T RG
   samtools_reheader: --no-PG
 threads:

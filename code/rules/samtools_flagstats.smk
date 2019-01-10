@@ -1,8 +1,8 @@
 rule samtools_flagstats:
     input:
-        "{unit}_mapped.mkdup.bam"
+        "{unit}_mapped_mkdup.bam"
     output:
-        "{unit}_mapped.mkdup.flagstats.txt"
+        "{unit}_mapped_mkdup.flagstats"
     threads:
         config["threads"]["samtools"]
     shell:

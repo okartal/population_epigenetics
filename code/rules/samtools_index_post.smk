@@ -1,8 +1,8 @@
 rule samtools_index_post:
     input:
-        "{unit}_mapped.mkdup.bam"
+        "{unit}_mapped_mkdup.bam"
     output:
-        "{unit}_mapped.mkdup.bam.bai"
+        "{unit}_mapped_mkdup.bam.bai"
     threads:
         config["threads"]["samtools"]
     shell:
