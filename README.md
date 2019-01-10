@@ -28,18 +28,18 @@ The aim of the project is to estimate the probability of gain and loss of DNA me
         ```
 - To run the pipeline on real data:
 
-    1. Set up your project folder with the following folders and files (structure similar to test/):
+    1. Set up your project folder with the following folders and files (structure of data folder is similar to test/, you can use symbolic links in data/primary):
         ```sh
         .
         ├── data
             ├── primary
                 ├── multiplex_samples.csv
                 ├── multiplex_units.csv
-                ├── <read_files>
-            ├── results_01
+                ├── <genome data>
+            ├── results
                 ├── config.yaml
         ```
-    2. Adapt the CSV and config file. Set up more results directories with adjusted config files if you want to keep results, for example for different parameter settings. **However, do not change the data fields in the config file, that would break the workflow!**
+    2. Adapt the CSVs and the config file params and threads directives. Set up additional results folders with their own config.yaml to store runs with different configurations. **However, do not change the data directive in the config file, that would break the workflow!**
     3. Ensure that the pop-epi environment is active.
     4. Run the pipeline from the appropriate results folder:
         ```sh
