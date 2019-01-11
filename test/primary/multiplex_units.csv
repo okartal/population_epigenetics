@@ -1,6 +1,6 @@
 id,CN,DT,PL,PM,flowcell id,flowcell lane number,read1,read2,index
-lineage-A,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,1,test-line_A_S1_R1_001.fastq.gz,test-line_A_S1_R2_001.fastq.gz,test-line_A_S1_I1_001.fastq.gz
-lineage-B,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,2,test-line_B_S2_R1_001.fastq.gz,test-line_B_S2_R2_001.fastq.gz,test-line_B_S2_I1_001.fastq.gz
-lineage-I,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,3,test-line_I_S3_R1_001.fastq.gz,test-line_I_S3_R2_001.fastq.gz,test-line_I_S3_I1_001.fastq.gz
-lineage-J,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,4,test-line_J_S4_R1_001.fastq.gz,test-line_J_S4_R2_001.fastq.gz,test-line_J_S4_I1_001.fastq.gz
+lineage-1,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,1,test-line_A_S1_R1_001.fastq.gz,test-line_A_S1_R2_001.fastq.gz,test-line_A_S1_I1_001.fastq.gz
+lineage-2,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,2,test-line_B_S2_R1_001.fastq.gz,test-line_B_S2_R2_001.fastq.gz,test-line_B_S2_I1_001.fastq.gz
+lineage-3,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,3,test-line_I_S3_R1_001.fastq.gz,test-line_I_S3_R2_001.fastq.gz,test-line_I_S3_I1_001.fastq.gz
+lineage-4,FGCZ,2017-05-09,ILLUMINA,HiSeq2500,CB0L6ANXX,4,test-line_J_S4_R1_001.fastq.gz,test-line_J_S4_R2_001.fastq.gz,test-line_J_S4_I1_001.fastq.gz
 
