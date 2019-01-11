@@ -1,0 +1,54 @@
+rule targets:
+    input:
+        expand("reads/{read}.fastq", read=config["reads"]),
+        expand("reads/{sample}_index.count.txt", sample=config["samples"]),
+        expand("reads/{sample}.demultiplexed/{iname}.read1.fastq", sample=config["samples"], iname=config["index_names"]),
+        expand("reads/{sample}.demultiplexed/{iname}.read2.fastq", sample=config["samples"], iname=config["index_names"]),
+        expand("reads/QC/{read}_fastqc.html", read=config["reads"])
+
+rule unzip:
+    input:
+        "reads/{read}.fastq.gz"
+    output:
+        "reads/{read}.fastq"
+    shell:
+        "gunzip -c {input} > {output}"
+
+rule index_count:
+    """Count occurence of each sequenced index.
+
+    If input is fastq file of original reads use
+        sed -n '1~4p' | cut -d: -f10 | ...
+    to extract the index sequences from the sequence IDs.
+    """
+    input:
+        "reads/{sample}_index.fastq"
+    output:
+        "reads/{sample}_index.count.txt"
+    shell:
+        " sed -n '2~4p' {input}"
+        " | sort | uniq -c | sort -nr"  # get unique indices sorted by count
+        " > {output}"
+
+rule demultiplex:
+    input:
+        read1 = "reads/{sample}.R1.fastq",
+        read2 = "reads/{sample}.R2.fastq",
+        iread = "reads/{sample}_index.fastq",
+        isheet = "reads/index_sheet.csv"
+    output:
+        expand("reads/{{sample}}.demultiplexed/{iname}.read1.fastq", iname=config["index_names"]),
+        expand("reads/{{sample}}.demultiplexed/{iname}.read2.fastq", iname=config["index_names"])
+    params:
+        outdir = "{sample}.demultiplexed/"
+    shell:
+        # "rm -r {params.outdir};" # needed because Bayexer complains if dir exists BUG
+        "Bayexer -i {input.read1} {input.read2} -j {input.iread} -o {params.outdir} -x {input.isheet}"
+
+rule fastqc:
+    input:
+        "reads/{read}.fastq"
+    output:
+        "reads/QC/{read}_fastqc.html"
+    shell:
+        "fastqc -o ./reads/QC/ {input}"
