@@ -7,3 +7,7 @@ test/results/*
 !test/primary/multiplex_*.csv
 !test/results/config.yaml
 *.*~
+data/primary/*
+data/results_2018-12-31/*
+!data/primary/multiplex_*.csv
+!data/results_2018-12-31/config.yaml

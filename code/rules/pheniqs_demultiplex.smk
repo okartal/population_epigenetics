@@ -1,7 +1,7 @@
 rule pheniqs_demultiplex:
     input:
         conf="{unit}_demux_config.json",
-        cram=config["data"]["dir"] + "{unit}_inter.cram"
+        cram="{unit}_inter.cram"
     output:
         cram="{unit}_demux.cram",
         json="{unit}_demux_report.json"
