@@ -10,4 +10,5 @@ test/results/*
 data/primary/*
 data/results_2018-12-31/*
 !data/primary/multiplex_*.csv
+!data/primary/oka-population_epigenetics.db
 !data/results_2018-12-31/config.yaml
