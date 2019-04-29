@@ -8,7 +8,7 @@ configfile: "config.yaml"
 
 units = pd.read_csv(config["data"]["multiplex_units"], index_col="id")
 
-rule harvest:
+rule _:
     input:
         expand("{unit}_inter.cram", unit=units.index.values),
         expand(
@@ -31,6 +31,10 @@ rule harvest:
                 # "_mapped_mkdup.idxstats"
             ]
         ),
+
+if "preprocessing_rules" in config.keys():
+    for rule in config["preprocessing_rules"]:
+        include: rule
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"

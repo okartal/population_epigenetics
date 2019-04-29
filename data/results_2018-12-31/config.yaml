@@ -1,23 +1,16 @@
+preprocessing_rules:
+  - rules/get_multiplex_samples.smk
+
 data:
   multiplex_units:
-    # A CSV file with header
-    # minimum columns: id,read1,read2,index,flowcell id,flowcell lane number
-    # optional read group columns: CN,DT,PL,PM
     ../primary/multiplex_units.csv
   multiplex_samples:
-    # A CSV file with header
-    # minimum columns: unit-id,barcode
-    # optional read group columns: SM,LB
     ../primary/multiplex_samples.csv
   reference_genome:
-    # assumes that genome index has been built with same name,
-    # otherwise do:
-    # $ biscuit index TAIR10.fasta
-    # and ensure that all generated files are in the same folder
     ../primary/TAIR10.fasta
+
 params:
   pheniqs_interleave:
-    # has to conform to header of multiplex_units.csv
     ["index", "read1", "read2"]
   pheniqs_demultiplex:
     undetermined:
@@ -33,7 +26,8 @@ params:
       confidence threshold: 0.95
   samtools_fastq: -T RG
   samtools_reheader: --no-PG
+
 threads:
-    pheniqs: 8
-    samtools: 8
-    biscuit_align: 8
+    pheniqs: 16
+    samtools: 16
+    biscuit_align: 16
