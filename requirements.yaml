@@ -4,8 +4,9 @@ channels:
   - bioconda
   - default
 dependencies:
-  - alfred
+  - numpy
   - pandas
   - pheniqs
+  - picard
   - samtools
   - snakemake
