@@ -11,7 +11,6 @@ units, samples, readgroups = io.get_multiplex_data(config["data"])
 
 rule _:
     input:
-        expand("{unit}_inter.cram", unit=units.index.values),
         expand("{unit}_demux_config.json", unit=units.index.values),
         expand("{unit}_demux.cram", unit=units.index.values),
         expand("{unit}_demux_report.json", unit=units.index.values),
