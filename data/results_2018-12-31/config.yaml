@@ -23,6 +23,6 @@ params:
       confidence threshold: 0.95
 
 threads:
-    pheniqs: 16
-    samtools: 16
-    biscuit_align: 16
+    pheniqs: 14
+    samtools: 14
+    biscuit_align: 14
