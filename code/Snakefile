@@ -2,31 +2,27 @@ import json
 
 import pandas as pd
 
-from utils import pheniqs
+from utils import io, pheniqs
+
 
 configfile: "config.yaml"
 
-units = pd.read_csv(config["data"]["multiplex_units"], index_col="id")
-samples = pd.read_csv(config["data"]["multiplex_samples"], index_col="SM")
+units, samples, readgroups = io.get_multiplex_data(config["data"])
 
 rule _:
     input:
-        expand(
-            "{unit}_{output}", unit=units.index.values,
-            output=[
-                "inter.cram",
-                "demux.cram",
-                "demux_config.json",
-                "demux_report.json"
-            ]
-        ),
-        
+        expand("{unit}_inter.cram", unit=units.index.values),
+        expand("{unit}_demux_config.json", unit=units.index.values),
+        expand("{unit}_demux.cram", unit=units.index.values),
+        expand("{unit}_demux_report.json", unit=units.index.values),
+        expand("{readgroup}_mapped.bam", readgroup=readgroups.prefix.values),
+        expand("{readgroup}_adapter_metrics.txt", readgroup=readgroups.prefix.values),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
 include: "rules/pheniqs_demultiplex.smk"
-
-
+include: "rules/get_readgroup_ubam.smk"
+include: "rules/biscuit_align.smk"
 
 
 

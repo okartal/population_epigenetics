@@ -15,6 +15,7 @@ data:
     # $ biscuit index TAIR10.fasta
     # and ensure that all generated files are in the same folder
     ../primary/TAIR10.fasta
+
 params:
   pheniqs_interleave:
     # has to conform to header of multiplex_units.csv
@@ -31,8 +32,7 @@ params:
       algorithm: pamld
       noise: 0.02
       confidence threshold: 0.95
-  samtools_fastq: -T RG
-  samtools_reheader: --no-PG
+
 threads:
     pheniqs: 8
     samtools: 8

@@ -21,8 +21,6 @@ params:
       algorithm: pamld
       noise: 0.02
       confidence threshold: 0.95
-  samtools_fastq: -T RG
-  samtools_reheader: --no-PG
 
 threads:
     pheniqs: 16
