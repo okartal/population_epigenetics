@@ -7,45 +7,30 @@ from utils import pheniqs
 configfile: "config.yaml"
 
 units = pd.read_csv(config["data"]["multiplex_units"], index_col="id")
+samples = pd.read_csv(config["data"]["multiplex_samples"], index_col="SM")
 
 rule _:
     input:
-        expand("{unit}_inter.cram", unit=units.index.values),
         expand(
-            "{unit}{suff}",
-            unit=units.index.values,
-            suff=[
-                "_demux_config.json",
-                "_demux_report.json",
-                "_demux.cram",
-                # "_R1.fastq",
-                # "_R2.fastq",
-                # "_mapped_noRG.bam",
-                # "_mapped.bam", 
-                # "_mapped.bam.bai",
-                # "_mapped_mkdup_unsorted.bam",
-                # "_mapped_mkdup.bam",
-                # "_mapped_mkdup.bam.bai",
-                # "_mapped_mkdup.flagstats",
-                # "_mapped_mkdup.stats",
-                # "_mapped_mkdup.idxstats"
+            "{unit}_{output}", unit=units.index.values,
+            output=[
+                "inter.cram",
+                "demux.cram",
+                "demux_config.json",
+                "demux_report.json"
             ]
         ),
-
-if "preprocessing_rules" in config.keys():
-    for rule in config["preprocessing_rules"]:
-        include: rule
+        
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
 include: "rules/pheniqs_demultiplex.smk"
-# include: "rules/samtools_fastq.smk"
-# include: "rules/biscuit_align.smk"
-# include: "rules/samtools_reheader.smk"
-# include: "rules/samtools_index_pre.smk"
-# include: "rules/biscuit_markdup.smk"
-# include: "rules/samtools_sort.smk"
-# include: "rules/samtools_index_post.smk"
-# include: "rules/samtools_flagstats.smk"
-# include: "rules/samtools_stats.smk"
-# include: "rules/samtools_idxstats.smk"
+
+
+
+
+
+
+
+
+
