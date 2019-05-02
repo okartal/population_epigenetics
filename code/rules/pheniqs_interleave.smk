@@ -7,7 +7,7 @@ rule pheniqs_interleave:
                 config["params"]["pheniqs_interleave"]
             ]
     output:
-        protected("{unit}_inter.cram")
+        temp("{unit}_inter.cram")
     threads:
         config["threads"]["pheniqs"]
     run:

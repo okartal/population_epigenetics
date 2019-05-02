@@ -18,6 +18,11 @@ rule _:
         expand("{readgroup}_mapped.bam", readgroup=readgroups.prefix.values),
         expand("{readgroup}_adapter_metrics.txt", readgroup=readgroups.prefix.values),
         expand("{readgroup}_mapped.bam.bai", readgroup=readgroups.prefix.values),
+        expand(
+            "{readgroup}_mapped.{stats}",
+            readgroup=readgroups.prefix.values,
+            stats=["stats", "flagstats", "idxstats"]
+        ),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
@@ -25,6 +30,7 @@ include: "rules/pheniqs_demultiplex.smk"
 include: "rules/get_readgroup_ubam.smk"
 include: "rules/biscuit_align.smk"
 include: "rules/samtools_index.smk"
+include: "rules/samtools_statistics.smk"
 
 
 
