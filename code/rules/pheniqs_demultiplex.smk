@@ -7,8 +7,11 @@ rule pheniqs_demultiplex:
         json="{unit}_demux_report.json"
     threads:
         config["threads"]["pheniqs"]
+    params:
+        "SORT_ORDER=queryname"
     shell:
         "pheniqs mux -t {threads}"
         " --config {input.conf}"
         " --report {output.json}"
-        " --output {output.cram}"
+        " | picard SortSam I=/dev/stdin O={output.cram} {params}"
+        
