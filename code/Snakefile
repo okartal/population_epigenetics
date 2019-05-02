@@ -17,12 +17,14 @@ rule _:
         expand("{unit}_demux_report.json", unit=units.index.values),
         expand("{readgroup}_mapped.bam", readgroup=readgroups.prefix.values),
         expand("{readgroup}_adapter_metrics.txt", readgroup=readgroups.prefix.values),
+        expand("{readgroup}_mapped.bam.bai", readgroup=readgroups.prefix.values),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
 include: "rules/pheniqs_demultiplex.smk"
 include: "rules/get_readgroup_ubam.smk"
 include: "rules/biscuit_align.smk"
+include: "rules/samtools_index.smk"
 
 
 
