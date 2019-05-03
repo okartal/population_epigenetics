@@ -4,6 +4,7 @@ channels:
   - bioconda
   - default
 dependencies:
+  - bwa
   - numpy
   - pandas
   - pheniqs
