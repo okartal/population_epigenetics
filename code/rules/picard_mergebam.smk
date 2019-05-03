@@ -1,7 +1,8 @@
 rule picard_mergebam:
     input:
         ubam="{unit}/{readgroup}_unmapped.bam",
-        sam="{unit}/{readgroup}_mapped.sam"
+        sam="{unit}/{readgroup}_mapped.sam",
+        ref=config["data"]["reference_genome"]
     output:
         bam=protected("{unit}/{readgroup}_mapped.bam")
     params:
