@@ -11,17 +11,21 @@ units, samples, readgroups = io.get_multiplex_data(config["data"])
 
 rule _:
     input:
-        expand("{unit}_demux_config.json", unit=units.index.values),
-        expand("{unit}_demux.cram", unit=units.index.values),
-        expand("{unit}_demux_report.json", unit=units.index.values),
-        expand("{readgroup}_mapped.bam", readgroup=readgroups.prefix.values),
-        expand("{readgroup}_adapter_metrics.txt", readgroup=readgroups.prefix.values),
-        expand("{readgroup}_mapped.bam.bai", readgroup=readgroups.prefix.values),
-        expand(
-            "{readgroup}_mapped.{stats}",
-            readgroup=readgroups.prefix.values,
-            stats=["stats", "flagstats", "idxstats"]
-        ),
+        expand("{unit}_demux_config.json",
+               unit=units.index.values),
+        expand("{unit}_demux.cram",
+               unit=units.index.values),
+        expand("{unit}_demux_report.json",
+               unit=units.index.values),
+        expand("{readgroup_prefix}_adapter_metrics.txt",
+               readgroup_prefix=readgroups.prefix.values),
+        expand("{readgroup_prefix}_mapped.bam",
+               readgroup_prefix=readgroups.prefix.values),
+        expand("{readgroup_prefix}_mapped.bam.bai",
+               readgroup_prefix=readgroups.prefix.values),
+        expand("{readgroup_prefix}_mapped.{stats}",
+               readgroup_prefix=readgroups.prefix.values,
+               stats=["stats", "flagstats", "idxstats"]),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
@@ -30,6 +34,8 @@ include: "rules/get_readgroup_ubam.smk"
 include: "rules/picard_markadapt.smk"
 include: "rules/picard_samtofastq.smk"
 include: "rules/biscuit_align.smk"
+include: "rules/picard_sort.smk"
+include: "rules/picard_reorder.smk"
 include: "rules/picard_mergebam.smk"
 include: "rules/samtools_index.smk"
 include: "rules/samtools_statistics.smk"

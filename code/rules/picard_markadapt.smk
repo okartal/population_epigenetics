@@ -4,5 +4,8 @@ rule picard_markadapt:
     output:
         bam=temp("{unit}/{readgroup}_markadapt.bam"),
         metrics="{unit}/{readgroup}_adapter_metrics.txt"
+    params:
+        config["params"]["picard_tmpdir"]
     shell:
-        "picard MarkIlluminaAdapters I={input} O={output.bam} M={output.metrics}"
+        "picard MarkIlluminaAdapters {params}"
+        " I={input} O={output.bam} M={output.metrics}"

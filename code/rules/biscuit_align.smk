@@ -4,11 +4,12 @@ rule biscuit_align:
         fq2="{unit}/{readgroup}_2.fastq",
         ref=config["data"]["reference_genome"]
     output:
-        sam=temp("{unit}/{readgroup}_mapped.sam")
+        sam=temp("{unit}/{readgroup}_unmerged_unordered_unsorted.sam")
     params:
         "-M"
     threads:
         config["threads"]["biscuit_align"]
     shell:
         " biscuit align {params} -t {threads} {input.ref}"
-        " {input.fq1} {input.fq2} > {output.sam} 2> /dev/null"
+        " {input.fq1} {input.fq2} > {output.sam}"
+
