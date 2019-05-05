@@ -8,7 +8,7 @@ rule get_readgroup_ubam:
     params:
         view="-b -h",
         rg=lambda wildcards: readgroups.id[wildcards.readgroup_name],
-        sort="SORT_ORDER=queryname" + config["params"]["picard_tmpdir"]
+        sort="SORT_ORDER=queryname " + config["params"]["picard_tmpdir"]
     shell:
         "samtools view {params.view} -r {params.rg} -@ {threads} {input}"
         " | picard SortSam {params.sort} I=/dev/stdin O={output}"
