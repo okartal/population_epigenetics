@@ -11,6 +11,5 @@ rule view_readgroup_ubam:
         sort="SORT_ORDER=queryname"
     shell:
         "samtools view {params.view} -r {params.rg} -@ {threads} {input}"
-        " | picard SortSam {config[params][picard]} {params.sort}"
-        " I=/dev/stdin O={output}"
+        " | picard SortSam {config[params][picard]} {params.sort} I=/dev/stdin O={output}"
         

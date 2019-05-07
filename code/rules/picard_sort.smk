@@ -4,6 +4,6 @@ rule picard_sort:
     output:
         sam=temp("{unit}/{readgroup}_unmerged_unordered.sam")
     params:
-        "SORT_ORDER=queryname " + config["params"]["picard_tmpdir"]
+        "SORT_ORDER=queryname"
     shell:
-        "picard SortSam {params} I={input.sam} O={output.sam}"
+        "picard SortSam {config[params][picard]} {params} I={input.sam} O={output.sam}"

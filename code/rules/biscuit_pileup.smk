@@ -1,27 +1,19 @@
 rule biscuit_pileup:
     input:
+        ref=config["data"]["reference_genome"],
+        bam="{unit}/{readgroup}_mapped.bam"
     output:
+        vcf="{unit}/{readgroup}.vcf.gz"
     threads:
+        config["threads"]["biscuit_pileup"]
     shell:
-        "biscuit pileup -q {threads} {input.ref} {input.cram}"
+        "biscuit pileup -q {threads} {input.ref} {input.bam}"
         " | bgzip > {output.vcf}"
 
-rule tabix_pileup:
+rule tabix_vcf:
     input:
+        "{unit}/{readgroup}.vcf.gz"
     output:
+        "{unit}/{readgroup}.vcf.gz.tbi"
     shell:
         "tabix -p vcf {input}"
-
-rule biscuit_vcf2bed:
-    input:
-    output:
-    params:
-        config["params"]["biscuit_vcf2bed"] -t c -k 5 -e
-    shell:
-        "biscuit vcf2bed {params} {input} > {output}"
-
-rule biscuit_mergecg:
-    input:
-    output:
-    shell:
-        "biscuit mergecg {input.ref} {input.bed} > {output}"

@@ -4,7 +4,5 @@ rule picard_reorder:
         ref=config["data"]["reference_genome"]
     output:
         sam=temp("{unit}/{readgroup}_unmerged.sam")
-    params:
-        config["params"]["picard_tmpdir"]
     shell:
-        "picard ReorderSam {params} R={input.ref} I={input.sam} O={output.sam}"
+        "picard ReorderSam {config[params][picard]} R={input.ref} I={input.sam} O={output.sam}"

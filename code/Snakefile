@@ -9,7 +9,7 @@ configfile: "config.yaml"
 
 units, samples, readgroups = io.get_multiplex_data(config["data"])
 
-rule _:
+rule _output:
     input:
         expand("{unit}_demux_config.json",
                unit=units.index.values),
@@ -26,19 +26,31 @@ rule _:
         expand("{readgroup_prefix}_mapped.{stats}",
                readgroup_prefix=readgroups.prefix.values,
                stats=["stats", "flagstats", "idxstats"]),
+        expand("{readgroup_prefix}.vcf.gz",
+               readgroup_prefix=readgroups.prefix.values),
+        expand("{readgroup_prefix}_cyt.bed.gz",
+               readgroup_prefix=readgroups.prefix.values),
+        expand("{readgroup_prefix}_snp.bed.gz",
+               readgroup_prefix=readgroups.prefix.values),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
 include: "rules/pheniqs_demultiplex.smk"
-include: "rules/get_readgroup_ubam.smk"
+include: "rules/view_readgroup_ubam.smk"
 include: "rules/picard_markadapt.smk"
 include: "rules/picard_samtofastq.smk"
 include: "rules/biscuit_align.smk"
 include: "rules/picard_sort.smk"
 include: "rules/picard_reorder.smk"
 include: "rules/picard_mergebam.smk"
+include: "rules/biscuit_markdup.smk"
+include: "rules/picard_sort_markdup.smk"
 include: "rules/samtools_index.smk"
 include: "rules/samtools_statistics.smk"
+include: "rules/biscuit_pileup.smk"
+include: "rules/biscuit_vcf2bed_cyt.smk"
+include: "rules/biscuit_vcf2bed_snp.smk"
+
 
 
 
