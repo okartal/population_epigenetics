@@ -21,9 +21,11 @@ params:
       algorithm: pamld
       noise: 0.02
       confidence threshold: 0.95
-  picard_tmpdir: "TMP_DIR=/data/home/oender/tmp/"
+  picard:
+    TMP_DIR=./tmp -Xmx8g
     
 threads:
-    pheniqs: 12
-    samtools: 12
-    biscuit_align: 12
+    pheniqs: 4
+    samtools: 4
+    biscuit_align: 4
+    biscuit_pileup: 4
