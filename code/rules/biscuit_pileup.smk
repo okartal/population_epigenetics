@@ -1,7 +1,8 @@
 rule biscuit_pileup:
     input:
         ref=config["data"]["reference_genome"],
-        bam="{unit}/{readgroup}_mapped.bam"
+        bam="{unit}/{readgroup}_mapped.bam",
+        bai="{unit}/{readgroup}_mapped.bam.bai"
     output:
         vcf="{unit}/{readgroup}.vcf.gz"
     threads:

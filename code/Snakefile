@@ -26,12 +26,15 @@ rule _output:
         expand("{readgroup_prefix}_mapped.{stats}",
                readgroup_prefix=readgroups.prefix.values,
                stats=["stats", "flagstats", "idxstats"]),
-        expand("{readgroup_prefix}.vcf.gz",
-               readgroup_prefix=readgroups.prefix.values),
-        expand("{readgroup_prefix}_cyt.bed.gz",
-               readgroup_prefix=readgroups.prefix.values),
-        expand("{readgroup_prefix}_snp.bed.gz",
-               readgroup_prefix=readgroups.prefix.values),
+        expand("{readgroup_prefix}.vcf.{suffix}",
+               readgroup_prefix=readgroups.prefix.values,
+               suffix=["gz", "gz.tbi"]),
+        expand("{readgroup_prefix}_cyt.bed.{suffix}",
+               readgroup_prefix=readgroups.prefix.values,
+               suffix=["gz", "gz.tbi"]),
+        expand("{readgroup_prefix}_snp.bed.{suffix}",
+               readgroup_prefix=readgroups.prefix.values,
+               suffix=["gz", "gz.tbi"]),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"

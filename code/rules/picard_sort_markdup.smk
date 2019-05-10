@@ -2,7 +2,7 @@ rule picard_sort_markdup:
     input:
         "{unit}/{readgroup}_markdup.bam"
     output:
-        protected("{unit}/{readgroup}_mapped.bam")
+        "{unit}/{readgroup}_mapped.bam"
     params:
         "SORT_ORDER=coordinate"
     shell:

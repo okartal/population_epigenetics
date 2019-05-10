@@ -4,7 +4,8 @@ rule picard_mergebam:
         mbam="{unit}/{readgroup}_unmerged.sam",
         ref=config["data"]["reference_genome"]
     output:
-        bam=temp("{unit}/{readgroup}_merded.bam")
+        bam=temp("{unit}/{readgroup}_merged.bam"),
+        bai=temp("{unit}/{readgroup}_merged.bai")
     params:
         "CREATE_INDEX=true ADD_MATE_CIGAR=true CLIP_ADAPTERS=false CLIP_OVERLAPPING_READS=true INCLUDE_SECONDARY_ALIGNMENTS=true MAX_INSERTIONS_OR_DELETIONS=-1 PRIMARY_ALIGNMENT_STRATEGY=BestMapq ATTRIBUTES_TO_RETAIN=XA ATTRIBUTES_TO_RETAIN=XB ATTRIBUTES_TO_RETAIN=ZC ATTRIBUTES_TO_RETAIN=ZR ATTRIBUTES_TO_RETAIN=XS ATTRIBUTES_TO_RETAIN=YD IS_BISULFITE_SEQUENCE=true"
     shell:
