@@ -29,7 +29,7 @@ rule _output:
         expand("{readgroup_prefix}.vcf.{suffix}",
                readgroup_prefix=readgroups.prefix.values,
                suffix=["gz", "gz.tbi"]),
-        expand("{readgroup_prefix}_cyt.bed.{suffix}",
+        expand("{readgroup_prefix}_smp.bed.{suffix}",
                readgroup_prefix=readgroups.prefix.values,
                suffix=["gz", "gz.tbi"]),
         expand("{readgroup_prefix}_snp.bed.{suffix}",
@@ -53,6 +53,7 @@ include: "rules/samtools_statistics.smk"
 include: "rules/biscuit_pileup.smk"
 include: "rules/biscuit_vcf2bed_cyt.smk"
 include: "rules/biscuit_vcf2bed_snp.smk"
+
 
 
 
