@@ -5,6 +5,7 @@
 test/primary/*
 test/results/*
 !test/primary/multiplex_*.csv
+!test/primary/phenotype_SM.csv
 !test/results/config.yaml
 *.*~
 data/primary/*
