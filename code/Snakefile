@@ -35,6 +35,9 @@ rule _output:
         expand("{readgroup_prefix}_snp.bed.{suffix}",
                readgroup_prefix=readgroups.prefix.values,
                suffix=["gz", "gz.tbi"]),
+        expand("{readgroup_prefix}_{context}-meth.bw",
+               readgroup_prefix=readgroups.prefix.values,
+               context=["CG", "CHG", "CHH"]),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
@@ -44,15 +47,16 @@ include: "rules/picard_markadapt.smk"
 include: "rules/picard_samtofastq.smk"
 include: "rules/biscuit_align.smk"
 include: "rules/picard_sort.smk"
-include: "rules/picard_reorder.smk"
+include: "rules/picard_reorder.smk" # this may be superfluous if we reorder the TAIR file from the beginning using samtools faidx TAIR10.fasta 1 2 3 4 5 Mt Pt > TAIR10.reordered.fasta
 include: "rules/picard_mergebam.smk"
 include: "rules/biscuit_markdup.smk"
 include: "rules/picard_sort_markdup.smk"
 include: "rules/samtools_index.smk"
 include: "rules/samtools_statistics.smk"
 include: "rules/biscuit_pileup.smk"
-include: "rules/biscuit_vcf2bed_cyt.smk"
+include: "rules/biscuit_vcf2bed_smp.smk"
 include: "rules/biscuit_vcf2bed_snp.smk"
+include: "rules/methylation_bigwig.smk"
 
 
 

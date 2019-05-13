@@ -1,13 +1,16 @@
 name:
   pop-epi
 channels:
+  - conda-forge
   - bioconda
   - default
 dependencies:
   - bwa
   - numpy
+  - openblas
   - pandas
   - pheniqs
   - picard
   - samtools
   - snakemake
+  - ucsc-bedgraphtobigwig
