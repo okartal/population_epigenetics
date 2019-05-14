@@ -2,10 +2,12 @@ import json
 
 import pandas as pd
 
-from utils import io, pheniqs
-
+from utils import genomics, io, pheniqs
 
 configfile: "config.yaml"
+
+CONTEXT = ["CG", "CHG", "CHH"]
+MREGION = ["HMR", "cHMR"]
 
 units, samples, readgroups = io.get_multiplex_data(config["data"])
 
@@ -37,7 +39,17 @@ rule _output:
                suffix=["gz", "gz.tbi"]),
         expand("{readgroup_prefix}_{context}-meth.bw",
                readgroup_prefix=readgroups.prefix.values,
-               context=["CG", "CHG", "CHH"]),
+               context=CONTEXT),
+        expand("{readgroup_prefix}_{context}.meth",
+               readgroup_prefix=readgroups.prefix.values,
+               context=CONTEXT),
+        expand("{readgroup_prefix}_{context}_{mregion}.{suffix}",
+               readgroup_prefix=readgroups.prefix.values,
+               context=CONTEXT,
+               mregion=MREGION,
+               suffix=["bed", "bedgraph"]),
+        expand("proportion_table_{context}.txt",
+               context=CONTEXT),
 
 include: "rules/pheniqs_interleave.smk"
 include: "rules/pheniqs_demultiplex_config.smk"
@@ -47,7 +59,7 @@ include: "rules/picard_markadapt.smk"
 include: "rules/picard_samtofastq.smk"
 include: "rules/biscuit_align.smk"
 include: "rules/picard_sort.smk"
-include: "rules/picard_reorder.smk" # this may be superfluous if we reorder the TAIR file from the beginning using samtools faidx TAIR10.fasta 1 2 3 4 5 Mt Pt > TAIR10.reordered.fasta
+include: "rules/picard_reorder.smk" # maybe avoidable this using samtools faidx TAIR10.fasta 1 2 3 4 5 Mt Pt > TAIR10.reordered.fasta
 include: "rules/picard_mergebam.smk"
 include: "rules/biscuit_markdup.smk"
 include: "rules/picard_sort_markdup.smk"
@@ -57,12 +69,6 @@ include: "rules/biscuit_pileup.smk"
 include: "rules/biscuit_vcf2bed_smp.smk"
 include: "rules/biscuit_vcf2bed_snp.smk"
 include: "rules/methylation_bigwig.smk"
-
-
-
-
-
-
-
-
-
+include: "rules/smp_to_methcounts.smk"
+include: "rules/methpipe_hmr.smk"
+include: "rules/merge_methcounts.smk"

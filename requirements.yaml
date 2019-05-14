@@ -1,11 +1,13 @@
 name:
   pop-epi
 channels:
+  - freenome
   - conda-forge
   - bioconda
   - default
 dependencies:
   - bwa
+  - methpipe
   - numpy
   - openblas
   - pandas
