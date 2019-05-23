@@ -9,8 +9,9 @@
 
 \begin{document}
 \begin{align}
-  n_i   &\sim \mathrm{Binomial}(N_i, p_i) \\
-  p_i   &\sim \mathrm{Beta}(\pi_i, \gamma) \\
-  \pi_i &\sim 
+  m_{it} &\sim \mathrm{Binomial}(n_{it}, p_{it})
+  \\ p_{it} &\sim \mathrm{Beta}(\pi_{it}, \gamma_{0})
+  \\ \theta_k &\sim \mathrm{Dirichlet}(\alpha)
+  \\ \mathrm{logit}(\pi_{it}) &\sim \mathrm{Normal}(\Theta X^t\beta)
 \end{align}
 \end{document}
