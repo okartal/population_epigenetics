@@ -5,6 +5,8 @@ data:
     ../primary/multiplex_samples.csv
   reference_genome:
     ../primary/TAIR10.fasta
+  reference_genome_size:
+    ../primary/TAIR10_chromSize.txt
 
 params:
   pheniqs_interleave:
@@ -29,3 +31,11 @@ threads:
     samtools: 4
     biscuit_align: 4
     biscuit_pileup: 4
+    biscuit_pileup_all: 32
+
+colormap:
+  context:
+    CG: '#74c476'
+    CHG: '#fd8d3c'
+    CHH: '#9e9ac8'
+
