@@ -9,19 +9,25 @@
 
 \begin{document}
 \begin{enumerate}
-\item The read count for 5mC ($m_i$) follows a binomial distribution
-  where the number of trials is given by the total read count ($n_i$)
-  and the probability of success is $p_i = M_i / 2$, where $M_i$ is
-  the count of 5mC in a diploid.
+\item The read count for 5mC (\(m_i\)) follows a binomial distribution
+  with the number of trials being the total read count (\(n_i\)) and
+  the probability of success being \(p_i = M_i / 2\), where \(M_i\) is
+  the number of 5mC alleles in the diploid.
   \begin{displaymath}
     m_i \sim \mathrm{Binomial}(n_i, \frac{M_i}{2})
   \end{displaymath}
-\item Test
+\item The number of 5mC alleles in the diploid (\(M_i\)) follows a
+  binomial distribution with two trials and the probability of success
+  being equal to the allele frequency of 5mC among the gametes,
+  \(\pi\). (what about selfing since we have a different freq from one
+  mother to the other, this \(\pi\) is specific to the mother of plant
+  \(i\)?)
+  \begin{displaymath}
+     M_i \sim \mathrm{Binomial}(2, \pi)
+  \end{displaymath}
 \end{enumerate}
 \begin{align}
-     m_i &\sim \mathrm{Binomial}(n_i, \frac{M_i}{2})
-  \\ M_i &\sim \mathrm{Binomial}(2, \pi)
-  \\ Z_{t+1}|Z_t &\sim \mathrm{Binomial}(2N, g(x_t))
+  Z_{t+1}|Z_t &\sim \mathrm{Binomial}(2N, g(x_t))
   \\ \mathrm{logit}(\pi_{it}) &\sim \mathrm{Normal}(\Theta X^t\beta)
 \end{align}
 \end{document}
