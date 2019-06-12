@@ -8,10 +8,20 @@
 \usepackage{amsmath}
 
 \begin{document}
+\begin{enumerate}
+\item The read count for 5mC ($m_i$) follows a binomial distribution
+  where the number of trials is given by the total read count ($n_i$)
+  and the probability of success is $p_i = M_i / 2$, where $M_i$ is
+  the count of 5mC in a diploid.
+  \begin{displaymath}
+    m_i \sim \mathrm{Binomial}(n_i, \frac{M_i}{2})
+  \end{displaymath}
+\item Test
+\end{enumerate}
 \begin{align}
-  m_{it} &\sim \mathrm{Binomial}(n_{it}, p_{it})
-  \\ p_{it} &\sim \mathrm{Beta}(\pi_{it}, \gamma_{0})
-  \\ \theta_k &\sim \mathrm{Dirichlet}(\alpha)
+     m_i &\sim \mathrm{Binomial}(n_i, \frac{M_i}{2})
+  \\ M_i &\sim \mathrm{Binomial}(2, \pi)
+  \\ Z_{t+1}|Z_t &\sim \mathrm{Binomial}(2N, g(x_t))
   \\ \mathrm{logit}(\pi_{it}) &\sim \mathrm{Normal}(\Theta X^t\beta)
 \end{align}
 \end{document}
