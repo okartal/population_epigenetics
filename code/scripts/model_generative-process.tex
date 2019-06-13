@@ -9,6 +9,23 @@
 
 \begin{document}
 \begin{enumerate}
+\item Draw the initial methylation probability (i.e. frequency of
+  methylated alleles) of the founder population:
+  \begin{displaymath}
+    \mu_0 \sim \mathrm{Beta}(\pi; \gamma)
+  \end{displaymath}
+\item For each line \( k=1 \ldots L \), draw the number of methylated
+  alleles for the first generation:
+  \begin{displaymath}
+     Z_{k,1} \sim \mathrm{Binomial}(2N_{k,1}; \mu_{0})
+  \end{displaymath}
+\item For each lineage and each generation \(t=1 \ldots T\), where
+  \(T\) is the number of transitions, draw the number of methylated
+  alleles in the subsequent generation:
+  \begin{displaymath}
+    Z_{k,t+1} | Z_{k,t} \sim \mathrm{Binomial}(2N_{k,t+1}; \mu_{k,t})
+  \end{displaymath}
+\item
 \item The read count for 5mC (\(m_i\)) follows a binomial distribution
   with the number of trials being the total read count (\(n_i\)) and
   the probability of success being \(p_i = M_i / 2\), where \(M_i\) is
@@ -23,7 +40,7 @@
   mother to the other, this \(\pi\) is specific to the mother of plant
   \(i\)?)
   \begin{displaymath}
-     M_i \sim \mathrm{Binomial}(2, \pi)
+     M_i \sim \mathrm{Multinomial}(2, \pi)
   \end{displaymath}
 \end{enumerate}
 \begin{align}
