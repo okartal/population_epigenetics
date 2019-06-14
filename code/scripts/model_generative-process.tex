@@ -12,39 +12,47 @@
 \item Draw the initial methylation probability (i.e. frequency of
   methylated alleles) of the founder population:
   \begin{displaymath}
-    \mu_0 \sim \mathrm{Beta}(\pi; \gamma)
+    \mu_0 \sim \mathsf{Beta}(\pi; \gamma)
   \end{displaymath}
 \item For each line \( k=1 \ldots L \), draw the number of methylated
   alleles for the first generation:
   \begin{displaymath}
-     Z_{k,1} \sim \mathrm{Binomial}(2N_{k,1}; \mu_{0})
+     Z_{k,1} \sim \mathsf{Binomial}(2N_{k,1}; \mu_{0})
   \end{displaymath}
 \item For each lineage and each generation \(t=1 \ldots T\), where
   \(T\) is the number of transitions, draw the number of methylated
   alleles in the subsequent generation:
   \begin{displaymath}
-    Z_{k,t+1} | Z_{k,t} \sim \mathrm{Binomial}(2N_{k,t+1}; \mu_{k,t})
+    Z_{k,t+1} | Z_{k,t} \sim \mathsf{Binomial}(2N_{k,t+1}; \mu_{k,t})
   \end{displaymath}
-\item
-\item The read count for 5mC (\(m_i\)) follows a binomial distribution
-  with the number of trials being the total read count (\(n_i\)) and
-  the probability of success being \(p_i = M_i / 2\), where \(M_i\) is
-  the number of 5mC alleles in the diploid.
-  \begin{displaymath}
-    m_i \sim \mathrm{Binomial}(n_i, \frac{M_i}{2})
-  \end{displaymath}
-\item The number of 5mC alleles in the diploid (\(M_i\)) follows a
-  binomial distribution with two trials and the probability of success
-  being equal to the allele frequency of 5mC among the gametes,
-  \(\pi\). (what about selfing since we have a different freq from one
-  mother to the other, this \(\pi\) is specific to the mother of plant
-  \(i\)?)
-  \begin{displaymath}
-     M_i \sim \mathrm{Multinomial}(2, \pi)
-  \end{displaymath}
+\item For each transgenerational observation \( b = 1 \ldots B \leq L \):
+  \begin{enumerate}
+  \item Draw a line assignment \( y_{b} \sim \mathsf{Categorical}(p_{1:L}) \)
+  \item Draw a generation assignment \( x_b | y_{b} \sim \mathsf{Categorical}(p_{1:T}) \)
+  \item For each data point $n$:
+    \begin{enumerate}
+    \item Draw biological sample (plant)
+    \item Draw data point (depends on observed trait)
+    \end{enumerate}
+  \end{enumerate}
+% \item The read count for 5mC (\(m_i\)) follows a binomial distribution
+%   with the number of trials being the total read count (\(n_i\)) and
+%   the probability of success being \(p_i = M_i / 2\), where \(M_i\) is
+%   the number of 5mC alleles in the diploid.
+%   \begin{displaymath}
+%     m_i \sim \mathsf{Binomial}(n_i, \frac{M_i}{2})
+%   \end{displaymath}
+% \item The number of 5mC alleles in the diploid (\(M_i\)) follows a
+%   binomial distribution with two trials and the probability of success
+%   being equal to the allele frequency of 5mC among the gametes,
+%   \(\pi\). (what about selfing since we have a different freq from one
+%   mother to the other, this \(\pi\) is specific to the mother of plant
+%   \(i\)?)
+%   \begin{displaymath}
+%      M_i \sim \mathsf{Multinomial}(2, \pi)
+%   \end{displaymath}
 \end{enumerate}
-\begin{align}
-  Z_{t+1}|Z_t &\sim \mathrm{Binomial}(2N, g(x_t))
-  \\ \mathrm{logit}(\pi_{it}) &\sim \mathrm{Normal}(\Theta X^t\beta)
-\end{align}
+% \begin{align}
+%   \mathrm{logit}(\pi_{it}) &\sim \mathsf{Normal}(\Theta X^t\beta)
+% \end{align}
 \end{document}
