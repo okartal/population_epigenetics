@@ -1,6 +1,7 @@
 # Mathematical Modeling of Population Epigenetics
 
-The aim of the project is to use Bayesian inference on a graphical model based on bisulfite-sequencing data across generations to estimate the propensity to gain or loose DNA methylation.
+The aim of the project is to use Bayesian inference on a graphical model to estimate the propensity to gain or loose DNA methylation. This repository contains the data analysis pipeline (in snakemake) to get the data for the model based on (possibly multiplexed) bisulfite sequencing data. 
+
 
 ## Prerequisites
 
